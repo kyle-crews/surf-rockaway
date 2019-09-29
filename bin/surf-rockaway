@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require './lib/surf_today'
+require './lib/environment'
 
-SurfToday::CLI.new.call
+SurfRockaway::CLI.new.call
 

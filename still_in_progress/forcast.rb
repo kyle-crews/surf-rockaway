@@ -1,4 +1,4 @@
-class SurfToday::Condition
+class Forcast
     attr_accessor :location, :temp, :H2Otemp, :wave_size, :rain, :one, :two
 
     def self.today
@@ -11,14 +11,6 @@ class SurfToday::Condition
     conditions.rain = "No"
 
     [conditions]
-    end
-
-    def self.menu_options
-        option = self.new
-        option.one = "Set notification"
-        option.two = "Next 3 days"
-
-    [option]
     end
 
 end
