@@ -39,36 +39,3 @@ class SetNotification
   end
 
 end
-
-=begin
-
-  def next_few_days
-      puts ""
-      puts <<-DOC.gsub /^\s*/,''
-          
-      ===========================
-      Rockaway Beach, Queens, NY
-      ===========================
-      ===========================
-      Day 1: (Today)
-      ===========================
-      temp: 87 // H2O temp: 62
-      wave: 3-4ft // Rain? No
-      ===========================
-      ===========================
-      Day 2:
-      ===========================
-      temp: 87 // H2O temp: 62
-      wave: 1-2ft // Rain? No
-      ===========================
-      ===========================
-      Day 3:
-      ===========================
-      temp: 87 // H2O temp: 62
-      wave: 2-4ft // Rain? Yes
-      DOC
-  end
-
-  end
-
-=end

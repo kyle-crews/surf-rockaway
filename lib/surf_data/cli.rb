@@ -11,7 +11,7 @@ class SurfRockaway::CLI
         puts "|| to".blue
         puts "|| Surf Rockaway".blue
         puts ""
-        puts "| Ready to surf? |"
+        puts "| Ready to surf? |".green
         puts ""
     end
 
@@ -32,7 +32,7 @@ class SurfRockaway::CLI
                 puts ""
             elsif input == "3 day"
                 puts ""
-                puts "... and here's 3 days"
+                SurfRockaway::SurfReport.multi_day
                 puts ""
             else input == "Exit"
                 puts ""
