@@ -36,7 +36,9 @@ class SurfRockaway::CLI
                 puts ""
             else input == "Exit"
                 puts ""
-                puts "See you soon!"
+                puts ""
+                puts "__̴ı̴̴̡̡̡ ̡͌l̡̡̡ ̡͌l̡*̡̡ ̴̡ı̴̴̡ ̡̡͡| ̲▫̲͡ ̲̲͡▫̲̲͡͡ ̲|̡̡̡ ̡ ̴̡ı̴̡̡ ̡͌l̡̡̡̡.___  ... See you soon! "
+                puts ""
                 exit
             end
         end

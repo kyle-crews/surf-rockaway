@@ -3,6 +3,8 @@ class SurfRockaway::SurfReport
 
     def self.current
         # Scrape magicseaweed.com and return current conditions for rockaway
+        puts "### Pulling current report ... this may take up to seconds ###"
+        puts ""
         self.scrape_data
     end
 
@@ -18,6 +20,8 @@ class SurfRockaway::SurfReport
 
     def self.multi_day
         # Scrape 3-day forecast
+        puts "### Pulling current report ... this may take up to seconds ###"
+        puts ""
         self.scrape_data_multi
     end
 

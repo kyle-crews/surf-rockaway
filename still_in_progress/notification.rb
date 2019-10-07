@@ -1,6 +1,12 @@
-class SetNotification
+=begin
+require 'terminal-notifier'
+
+gem install terminal-notifier
+
+TerminalNotifier.notify('Hello World')
   
-  def request_email
+
+def request_email
     prompt = TTY::Prompt.new
     puts ""
     puts ">> What's your email address?"
@@ -39,3 +45,5 @@ class SetNotification
   end
 
 end
+
+=end
