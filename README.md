@@ -1,4 +1,4 @@
-# surf-rockaway
+# SurfRockaway
 
 // quick summary
 
@@ -10,9 +10,16 @@ A Florida native for most of my life, moving to NYC over the summer left me long
 
 // data provided
 
->> current forcast
->> 3-day surf condtions
->> (in development) Set notification based on wave size
+--- current forcast
+--- 3-day surf condtions
+--- (in development) Set notification based on wave size
 
+## Installation
 
+```
+$ gem install surf-rockaway
+```
 
+## License
+
+All the works are available under the MIT license.
