@@ -1,52 +1,72 @@
 class SurfRockaway::SurfReport
     attr_accessor :location, :wave_size, :wind, :primary_swell, :weather, :temp, :date, :time
 
+    @doc = Nokogiri::HTML(open('https://magicseaweed.com/Rockaway-Surf-Report/384/'))
+
     def self.current
+        
         # Scrape magicseaweed.com and return current conditions for rockaway
+        
         puts "### Pulling current report ... this may take up to 10 seconds ###"
         puts ""
+        
         self.scrape_data
+
     end
 
     def self.scrape_data
+        
         # creates empty array to store data
+        
         conditions = []
 
         # pushes new instances of data from magicseaweed.com to conditions array
+        
         conditions << self.scrape_magicseaweed
 
         conditions
     end
 
     def self.multi_day
+        
         # Scrape 3-day forecast
+        
         puts "### Pulling current report ... this may take up to 15 seconds ###"
         puts ""
+        
         self.scrape_data_multi
+    
     end
 
     def self.scrape_data_multi
-        
+
         multi_day = []
         
+        # pushes new instances of data for 3-day forcast to multi_day array
+
         multi_day << self.scrape_magicseaweed_3day
+
+        # returns the array
 
         multi_day
     end
 
 
     def self.scrape_magicseaweed
-        doc = Nokogiri::HTML(open('https://magicseaweed.com/Rockaway-Surf-Report/384/'))
         
+        # scrape current surf report
+
         current_report = self.new
-        location_raw = doc.search("div.forecast-sub-title-fluid").text.strip.split
+        location_raw = @doc.search("div.forecast-sub-title-fluid").text.strip.split
         current_report.location = location_raw.first(5).join(" ")
-        current_report.wave_size = doc.xpath("//ul[@class='rating rating-large clearfix']/li").text.strip
-        current_report.wind = doc.xpath("//p[@class='h5 nomargin-top']").text.strip
-        p_swell = doc.search("div.list-group-content").text.strip.split
+        current_report.wave_size = @doc.xpath("//ul[@class='rating rating-large clearfix']/li").text.strip
+        current_report.wind = @doc.xpath("//p[@class='h5 nomargin-top']").text.strip
+        p_swell = @doc.search("div.list-group-content").text.strip.split
         current_report.primary_swell = p_swell.first(3).join(" ")
-        current_report.weather = doc.xpath("//p[@class='nomargin-bottom']/i").text.strip
+        current_report.weather = @doc.xpath("//p[@class='nomargin-bottom']/i").text.strip
         
+        # CLI OUTPUT
+
         puts "================================"
         puts "#{current_report.location}"
         puts "================================"
@@ -61,36 +81,40 @@ class SurfRockaway::SurfReport
     end
 
     def self.scrape_magicseaweed_3day
-        doc = Nokogiri::HTML(open('https://magicseaweed.com/Rockaway-Surf-Report/384/'))
 
         # collect Day 1
 
         day_1 = self.new
-        day_1.date = doc.search("tr.tbody-title").text.strip.split("   ").compact.first
-        day_1.time = doc.search("td.nopadding-left").text.strip.split[2..6]
-        day_1.wave_size = doc.search("td.background-info").text.strip.split[2..6]
-        day_1.primary_swell = doc.search("h4.font-sans-serif").text.strip.split[4..13]
-        day_1.temp = doc.search("h5.heavy").text.strip.split("f")[2..6]
+        day_1.date = @doc.search("tr.tbody-title").text.strip.split("   ").compact.first
+        day_1.time = @doc.search("td.nopadding-left").text.strip.split[2..6]
+        day_1.wave_size = @doc.search("td.background-info").text.strip.split[2..6]
+        day_1.primary_swell = @doc.search("h4.font-sans-serif").text.strip.split[4..13]
+        day_1.temp = @doc.search("h5.heavy").text.strip.split("f")[2..6]
+        day_1
 
         # collect Day 2
 
         day_2 = self.new
-        day_2.date = doc.search("tr.tbody-title").text.strip.split.slice(4..5).join(" ")
-        day_2.time = doc.search("td.nopadding-left").text.strip.split[2..6]
-        day_2.wave_size = doc.search("td.background-info").text.strip.split[10..14]
-        day_2.primary_swell = doc.search("h4.font-sans-serif").text.strip.split[20..29]
-        day_2.temp = doc.search("h5.heavy").text.strip.split("f")[10..14]
+        day_2.date = @doc.search("tr.tbody-title").text.strip.split.slice(4..5).join(" ")
+        day_2.time = @doc.search("td.nopadding-left").text.strip.split[2..6]
+        day_2.wave_size = @doc.search("td.background-info").text.strip.split[10..14]
+        day_2.primary_swell = @doc.search("h4.font-sans-serif").text.strip.split[20..29]
+        day_2.temp = @doc.search("h5.heavy").text.strip.split("f")[10..14]
+        day_2
 
         # collect Day 3
 
         day_3 = self.new
-        day_3.date = doc.search("tr.tbody-title").text.strip.split.slice(6..7).join(" ")
-        day_3.time = doc.search("td.nopadding-left").text.strip.split[2..6]
-        day_3.wave_size = doc.search("td.background-info").text.strip.split[18..22]
-        day_3.primary_swell = doc.search("h4.font-sans-serif").text.strip.split[36..45]
-        day_3.temp = doc.search("h5.heavy").text.strip.split("f")[18..22]
+        day_3.date = @doc.search("tr.tbody-title").text.strip.split.slice(6..7).join(" ")
+        day_3.time = @doc.search("td.nopadding-left").text.strip.split[2..6]
+        day_3.wave_size = @doc.search("td.background-info").text.strip.split[18..22]
+        day_3.primary_swell = @doc.search("h4.font-sans-serif").text.strip.split[36..45]
+        day_3.temp = @doc.search("h5.heavy").text.strip.split("f")[18..22]
+        day_3
 
-        # CLI display for 3 day forecast
+        # CLI DISPLAY FOR 3 DAY FORECAST
+
+        # day 1
 
         puts ""
         puts "==========================="
@@ -105,6 +129,9 @@ class SurfRockaway::SurfReport
             ["#{day_1.time[4]}", "#{day_1.wave_size[4]}", "#{day_1.primary_swell[4]}", "#{day_1.temp[4]}"]
         ]
         puts table.render(:ascii).green
+        
+        # day 2
+
         puts ""
         puts "==========================="
         puts "#{day_2.date}"
@@ -118,6 +145,8 @@ class SurfRockaway::SurfReport
             ["#{day_2.time[4]}", "#{day_2.wave_size[4]}", "#{day_2.primary_swell[4]}", "#{day_2.temp[4]}"]
         ]
         puts table.render(:ascii).green
+
+        # day 3
 
         puts ""
         puts "==========================="
@@ -135,7 +164,6 @@ class SurfRockaway::SurfReport
         puts ""
         puts ""
         puts "######################################"
-        
     end
-
+    
 end

@@ -7,4 +7,5 @@ require "tty-table"
 
 require_relative "./surf_data/version"
 require_relative './surf_data/cli'
-require_relative './surf_data/surf_report.rb'
+require_relative './surf_data/surf_report'
+require_relative './surf_data/search'
