@@ -7,33 +7,27 @@
     # hash with wave/date/time for the next 3-day
     # display waves array as CLI options
     # accept user input for wave size
+    # search hash for days/times when waves will be at the desired height
+    # return results on CLI
+    # fix return formatting for #return_values
+    # link values for #search_wave_size
     
     #### TODO ####
 
-    # search hash for days/times when waves will be at the desired height
-    # return results on CLI
-    # clean up and refactor code for better organization/assignment of scraped code
+    # refactor code for clarity
 
-
-# Hi there! 
-
-# My apologies on the delay ... haven't had much time in front of the computer the last few days.
-
-# As discussed, I incorporated a way to search for a specific wave size.  The way I collected/returned 
-# data using the gem TTY-Prompt, proved challenging to work with. To save time, keep things simple, and
-# move forward  ... for #Search, I built a nested hash broken down by day. Many of the data points, I pulled
-# elsewhere in the program.
+# As discussed, I buit out functionality to search for a specific wave size.
 # 
-# The #Student class below takes an input in the form of a wave size. The wave size then iterates over the 
+#   1. select input from a index of avaliable wave sizes
+#   2. use input to query dates, times, and wave sizes from 3 day forecast 
+#   3. return date && time when wave size == input
+# 
+# The way I collected/returned data, using the TTY-Prompt gem, proved challenging to work with. To save time
+# and move forward  ... I built a nested hash, broken down by day, in #Search.
+# The #Search class below takes an input in the form of a wave size. The wave size then iterates over the 
 # nested hash, #search_by_size, to locate a day/time where wave size == input.
 
 ###############################################################################
-
-require 'pry'
-require 'nokogiri'
-require 'open-uri'
-
-# 
 
 class SurfRockaway::Search
     
@@ -48,41 +42,84 @@ class SurfRockaway::Search
         day_3 = @doc.search("td.background-info").text.strip.split[18..22]
         
         # combines days into a variable called "waves" 
-
-        waves = day_1 + day_2 + day_3
-
         # returns "waves" as an array with only unique values
+
+        @size = day_1 + day_2 + day_3
+        @size.uniq
+
+    end
+
+    def self.date_options
+
+        # scrapes magicseaweed.com for dates
+        @date = []
+
+        day_1 = @doc.search("tr.tbody-title").text.strip.split("   ").compact.first 
+        day_2 = @doc.search("tr.tbody-title").text.strip.split.slice(4..5).join(" ")
+        day_3 = @doc.search("tr.tbody-title").text.strip.split.slice(6..7).join(" ")
+
+        # returns data for each day && pushes data to instance variable @date 
+        @date << day_1
+        @date << day_2
+        @date << day_3
+
+        # calls @date
+        @date
+
+    end
+
+    def self.time_options
+
+        # scrapes magicseaweed.com for times && returns @times variable
+
+        @time = @doc.search("td.nopadding-left").text.strip.split[2..6]
+        @time
+
+    end
+
+    def self.collect_data
+
+        # call #wave_options, @waves, #date_options, #time_options
         
-        waves.uniq
+        wave_options && @waves
+        date_options
+        time_options
     
     end
+
     
     def self.search_by_size(selection)
+        
+        # calls #collect_data
+        collect_data
 
+        # create array to store day, time, and wave size as nested hash
         wave_sizes = [
                 
-            { :day => "10/15/2019", :time => "6A", :size => "1ft" },
-            { :day => "10/15/2019", :time => "9A", :size => "1-2ft" },
-            { :day => "10/15/2019", :time => "12P", :size => "1-2ft" },
-            { :day => "10/15/2019", :time => "3P", :size => "1-2ft" },
-            { :day => "10/15/2019", :time => "6P", :size => "1-2ft" },
+            { :day => "#{@date[0]}", :time => "#{@time[0]}", :size => "#{@size[0]}" },
+            { :day => "#{@date[0]}", :time => "#{@time[1]}", :size => "#{@size[1]}" },
+            { :day => "#{@date[0]}", :time => "#{@time[2]}", :size => "#{@size[2]}" },
+            { :day => "#{@date[0]}", :time => "#{@time[3]}", :size => "#{@size[3]}" },
+            { :day => "#{@date[0]}", :time => "#{@time[4]}", :size => "#{@size[4]}" },
 
-            { :day => "10/16/2019", :time => "6A", :size => "3-4ft" },
-            { :day => "10/16/2019", :time => "9A", :size => "2-4ft" },
-            { :day => "10/16/2019", :time => "12P", :size => "2-4ft" },
-            { :day => "10/16/2019", :time => "3P", :size => "4-5ft" },
-            { :day => "10/16/2019", :time => "6P", :size => "4-5ft" },
+            { :day => "#{@date[1]}", :time => "#{@time[0]}", :size => "#{@size[5]}" },
+            { :day => "#{@date[1]}", :time => "#{@time[1]}", :size => "#{@size[6]}" },
+            { :day => "#{@date[1]}", :time => "#{@time[2]}", :size => "#{@size[7]}" },
+            { :day => "#{@date[1]}", :time => "#{@time[3]}", :size => "#{@size[8]}" },
+            { :day => "#{@date[1]}", :time => "#{@time[4]}", :size => "#{@size[9]}" },
 
-            { :day => "10/17/2019", :time => "6A", :size => "3-5ft" },
-            { :day => "10/17/2019", :time => "9A", :size => "3-5ft" },
-            { :day => "10/17/2019", :time => "12P", :size => "5-6ft" },
-            { :day => "10/17/2019", :time => "3P", :size => "5-6ft" },
-            { :day => "10/17/2019", :time => "6P", :size => "5-6ft" },
+            { :day => "#{@date[2]}", :time => "#{@time[0]}", :size => "#{@size[10]}" },
+            { :day => "#{@date[2]}", :time => "#{@time[1]}", :size => "#{@size[11]}" },
+            { :day => "#{@date[2]}", :time => "#{@time[2]}", :size => "#{@size[12]}" },
+            { :day => "#{@date[2]}", :time => "#{@time[3]}", :size => "#{@size[13]}" },
+            { :day => "#{@date[2]}", :time => "#{@time[4]}", :size => "#{@size[14]}" },
 
         ]
 
+        # selection argument captured on ./cli.rb
+        # selection compared to key :size by iterating over array #wave_sizes
         wave_sizes.select {|i| i[:size] == selection}
-                    
+               
     end
 
 end

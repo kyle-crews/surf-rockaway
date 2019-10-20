@@ -58,7 +58,7 @@ class SurfRockaway::CLI
                 input_size = SurfRockaway::Search.search_by_size(selection)
                 return_values = input_size.collect {|day| day.values}.to_a
                 puts ""
-                puts "======== SEARCHING FOR WAVE @ #{selection.green} ============"
+                puts "== WAVES @ #{selection.green} ============"
                 puts ""
                 puts return_values
                 puts ""
@@ -74,22 +74,3 @@ class SurfRockaway::CLI
         end
     end
 end
-        
-=begin
-
-        def self.search_waves(selection)
-
-            puts ""
-            puts "---------- SEARCHING FOR WAVE @ #{selection} ----------"
-            puts ""
-            SurfRockaway::Search.search_by_sizes[selection-1].each.with_index(selection) do |wave, index|
-                puts "#{index}. #{restaurant.name} - #{restaurant.location}"
-    
-        end
-    end
-end
-        
-input = nil
-puts "please select: "
-input = gets.chomp
-=end

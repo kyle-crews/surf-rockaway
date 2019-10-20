@@ -115,7 +115,7 @@ class SurfRockaway::SurfReport
         # CLI DISPLAY FOR 3 DAY FORECAST
 
         # day 1
-
+        
         puts ""
         puts "==========================="
         puts "#{day_1.date}"
@@ -123,10 +123,10 @@ class SurfRockaway::SurfReport
         table = TTY::Table.new ['', 'wave_size', 'primary_swell', 'temp'], 
         [       
             ["#{day_1.time[0]}", "#{day_1.wave_size[0]}", "#{day_1.primary_swell[0]}", "#{day_1.temp[0]}"],
-            ["#{day_1.time[1]}", "#{day_1.wave_size[1]}", "#{day_1.primary_swell[1]}", "#{day_1.temp[1]}"],
-            ["#{day_1.time[2]}", "#{day_1.wave_size[2]}", "#{day_1.primary_swell[2]}", "#{day_1.temp[2]}"],
-            ["#{day_1.time[3]}", "#{day_1.wave_size[3]}", "#{day_1.primary_swell[3]}", "#{day_1.temp[3]}"],
-            ["#{day_1.time[4]}", "#{day_1.wave_size[4]}", "#{day_1.primary_swell[4]}", "#{day_1.temp[4]}"]
+            ["#{day_1.time[1]}", "#{day_1.wave_size[1]}", "#{day_1.primary_swell[2]}", "#{day_1.temp[1]}"],
+            ["#{day_1.time[2]}", "#{day_1.wave_size[2]}", "#{day_1.primary_swell[4]}", "#{day_1.temp[2]}"],
+            ["#{day_1.time[3]}", "#{day_1.wave_size[3]}", "#{day_1.primary_swell[6]}", "#{day_1.temp[3]}"],
+            ["#{day_1.time[4]}", "#{day_1.wave_size[4]}", "#{day_1.primary_swell[8]}", "#{day_1.temp[4]}"]
         ]
         puts table.render(:ascii).green
         
@@ -139,10 +139,10 @@ class SurfRockaway::SurfReport
         table = TTY::Table.new ['', 'wave_size', 'primary_swell', 'temp'],
         [       
             ["#{day_2.time[0]}", "#{day_2.wave_size[0]}", "#{day_2.primary_swell[0]}", "#{day_2.temp[0]}"],
-            ["#{day_2.time[1]}", "#{day_2.wave_size[1]}", "#{day_2.primary_swell[1]}", "#{day_2.temp[1]}"],
-            ["#{day_2.time[2]}", "#{day_2.wave_size[2]}", "#{day_2.primary_swell[2]}", "#{day_2.temp[2]}"],
-            ["#{day_2.time[3]}", "#{day_2.wave_size[3]}", "#{day_2.primary_swell[3]}", "#{day_2.temp[3]}"],
-            ["#{day_2.time[4]}", "#{day_2.wave_size[4]}", "#{day_2.primary_swell[4]}", "#{day_2.temp[4]}"]
+            ["#{day_2.time[1]}", "#{day_2.wave_size[1]}", "#{day_2.primary_swell[2]}", "#{day_2.temp[1]}"],
+            ["#{day_2.time[2]}", "#{day_2.wave_size[2]}", "#{day_2.primary_swell[4]}", "#{day_2.temp[2]}"],
+            ["#{day_2.time[3]}", "#{day_2.wave_size[3]}", "#{day_2.primary_swell[6]}", "#{day_2.temp[3]}"],
+            ["#{day_2.time[4]}", "#{day_2.wave_size[4]}", "#{day_2.primary_swell[8]}", "#{day_2.temp[4]}"]
         ]
         puts table.render(:ascii).green
 
@@ -155,15 +155,14 @@ class SurfRockaway::SurfReport
         table = TTY::Table.new ['', 'wave_size', 'primary_swell', 'temp'],
         [       
             ["#{day_3.time[0]}", "#{day_3.wave_size[0]}", "#{day_3.primary_swell[0]}", "#{day_3.temp[0]}"],
-            ["#{day_3.time[1]}", "#{day_3.wave_size[1]}", "#{day_3.primary_swell[1]}", "#{day_3.temp[1]}"],
-            ["#{day_3.time[2]}", "#{day_3.wave_size[2]}", "#{day_3.primary_swell[2]}", "#{day_3.temp[2]}"],
-            ["#{day_3.time[3]}", "#{day_3.wave_size[3]}", "#{day_3.primary_swell[3]}", "#{day_3.temp[3]}"],
-            ["#{day_3.time[4]}", "#{day_3.wave_size[4]}", "#{day_3.primary_swell[4]}", "#{day_3.temp[4]}"]
+            ["#{day_3.time[1]}", "#{day_3.wave_size[1]}", "#{day_3.primary_swell[2]}", "#{day_3.temp[1]}"],
+            ["#{day_3.time[2]}", "#{day_3.wave_size[2]}", "#{day_3.primary_swell[4]}", "#{day_3.temp[2]}"],
+            ["#{day_3.time[3]}", "#{day_3.wave_size[3]}", "#{day_3.primary_swell[6]}", "#{day_3.temp[3]}"],
+            ["#{day_3.time[4]}", "#{day_3.wave_size[4]}", "#{day_3.primary_swell[8]}", "#{day_3.temp[4]}"]
         ]
         puts table.render(:ascii).green
         puts ""
         puts ""
         puts "######################################"
     end
-    
 end
