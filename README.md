@@ -5,7 +5,7 @@ Simple ruby based CLI application to pull a surf report for Rockaway Beach, Quee
 ## Installation
 
 ```
-$ gem install surf-rockaway
+$ gem install surf_rockaway
 ```
 
 ## Detailed Description
